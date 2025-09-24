@@ -13,7 +13,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 
 const personSchema=new Schema({
-  name:String,
+  name: { type: String, required: true },
   age:Number,
   favoriteFoods:[String]
 })
