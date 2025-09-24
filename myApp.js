@@ -1,7 +1,6 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-console.log("👉 MONGO_URI from env:", process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -25,7 +24,16 @@ exports.PersonModel = Person;
 
 
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  const person=new Person({
+    name:"Mike",
+    age:45,
+    favoriteFoods:["pizza","pasta"]
+  })
+
+  person.save((err,data)=>{
+    if(err) return done(err);
+    return done(null,data);
+  })
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
