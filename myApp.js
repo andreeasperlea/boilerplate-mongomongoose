@@ -5,7 +5,12 @@ const { Schema } = mongoose;
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
+}).then(() => {
+  console.log("✅ MongoDB connected!");
+}).catch(err => {
+  console.error("❌ Connection error:", err);
 });
+
 
 const personSchema=new Schema({
   name:String,
@@ -14,6 +19,9 @@ const personSchema=new Schema({
 })
 
 let Person=mongoose.model('Person', personSchema);
+
+exports.PersonModel = Person;
+
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
