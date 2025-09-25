@@ -22,7 +22,15 @@ let Person=mongoose.model('Person', personSchema);
 
 exports.PersonModel = Person;
 
-
+const arrayOfPeople=[{
+  name:"john",
+  age:56,
+  favoriteFoods:["sushi","sweets"]}
+  ,{
+    name:"Mike",
+    age:45,
+    favoriteFoods:["pizza","pasta"]
+  }];
 const createAndSavePerson = (done) => {
   const person=new Person({
     name:"Mike",
@@ -37,7 +45,10 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople).save((err,data)=>{
+    if(err) return done(err);
+    return done(null,data);
+  })
 };
 
 const findPeopleByName = (personName, done) => {
