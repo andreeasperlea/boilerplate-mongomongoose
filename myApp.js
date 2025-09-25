@@ -52,7 +52,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-  personScheman.find({name:personName},(err,data)=>{
+  Person.find({name:personName},(err,data)=>{
     if(err) return done(err);
     return done(null,data);
   })
